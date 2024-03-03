@@ -274,14 +274,16 @@ FROM
 GROUP BY customer_id;
 ```
 **Steps**
+- Create **CTE**  to calculate the points based on the condition in the questions by using **CASE** function.
+- Create 2nd query to **SUM** the points and **GROUP** the results by ```customer_id```.
 
 **Findings** 
 
 <kbd>![image](https://github.com/Sakinahcr/Case-Study-1-Danny-s-Diner/assets/132161850/db3feb74-cf69-4440-9ff3-dbe10e890869)
 
+- _Customer B has collected the highest points; 940pts._ 
 
 **10. In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January?**
-
 
 ```sql
 WITH customer_point AS
@@ -312,10 +314,12 @@ ORDER BY customer_id;
 ```
 **Steps**
 
+- Create **CTE**  to calculate the points based on the condition in the questions by using **CASE** function.
+- Create 2nd query to **SUM** the points and **GROUP** the results by ```customer_id```.
+
 **Findings** 
 
 <kbd>![image](https://github.com/Sakinahcr/Case-Study-1-Danny-s-Diner/assets/132161850/b603318f-9264-4666-aa40-9ee4da1bf337)
 
-
-
-
+- _Customer A has collected 1020 points at the end of January 2021._
+- _Customer B has collected 320 points at the end of January 2021._
