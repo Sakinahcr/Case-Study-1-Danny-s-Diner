@@ -1,9 +1,9 @@
 # Case Study #1 - Danny's Diner
 
 ## Table of Contents
-- Problem statement
-- Entity Relationship Diagram
-- Questions and Solutions
+- [Problem statement](#problem-statement)
+- [Entity Relationship Diagram](#entity-relationship-diagram)
+- [Questions and Solutions](#questions-and-solutions)
 
   
 ## Problem Statement
