@@ -114,8 +114,8 @@ GROUP BY s.customer_id , p.product_name;
 ```
 
 **Steps**
-- 
-
+- Create **CTE** to find the product which mostly purchased by the customer by uing **COUNT** function and **ORDER** the count in **DESC** order
+- Create 2nd query to breakdown how many times each customers bought the most popular product
 
 **Findings**
 
@@ -146,10 +146,15 @@ WHERE
 ```
 **Steps**
 
+- Create **CTE** to **RANK** the ```product_name``` by the frequency of the ```order_date```.
+- Create outer query to extract only the ```product_name``` mostly bought by customer by using condition **WHERE**
+ the rank = 1.
+
 **Findings** 	
 
 <kbd>![image](https://github.com/Sakinahcr/Case-Study-1-Danny-s-Diner/assets/132161850/6a9657af-1f46-4dee-87da-739d0bf8788e)
 
+ _Overall, ramen is the most popular menu among the customers_
 
 **6. Which item was purchased first by the customer after they became a member?**
 
@@ -175,10 +180,14 @@ ORDER BY customer_id;
 ```
 
 **Steps**
+- Create **CTE** to find the first product purchased by customer after being a member. **RANK** the product by the ```order_date``` with condition the ```order_date``` is after the ```join_date``` after being a member.
+- Outer query to extract only the product ranked first; which the first ```product_name``` purchased after being a member. 
 
 **Findings** 
 
 <kbd>![image](https://github.com/Sakinahcr/Case-Study-1-Danny-s-Diner/assets/132161850/65aca734-d26e-47bb-bb55-2f172caae46d)
+
+_After being a member, Customer A bought ramen while Customer B bought sushi. FYI, only Customer A & B subscribe the membership of the diner._
 
 **7. Which item was purchased just before the customer became a member?**
 
@@ -206,9 +215,14 @@ ORDER BY customer_id;
 
 **Steps**
 
+- Create **CTE** to find the last product purchased by customer before being a member. **RANK** the product by the ```order_date``` in **DESC** order with condition the ```order_date``` is before the ```join_date``` being a member.
+- Outer query to extract only the product ranked first; which the last ```product_name``` purchased before being a member.
+  
 **Findings** 
 
 <kbd>![image](https://github.com/Sakinahcr/Case-Study-1-Danny-s-Diner/assets/132161850/e8d31e07-e01d-4e1b-9bb1-08ea82128b4a)
+
+_Customer A purchased Sushi and Curry while Customer B bought Sushi before subscribe to the membership._
 
 
 **8. What is the total items and amount spent for each member before they became a member?**
