@@ -243,12 +243,17 @@ GROUP BY customer_id
 ORDER BY customer_id;
 ```
 **Steps**
+- Use **COUNT** on ```product_name``` to find the total items and **SUM** on ```price``` to total the amount spent.
+- Use **JOIN** to combine all the information which are from different tables; ```sales```, ```menu``` and ```members```.
+- **GROUP** the results by the customer_id.
 
 **Findings** 
 
 <kbd>![image](https://github.com/Sakinahcr/Case-Study-1-Danny-s-Diner/assets/132161850/627b97b2-69cc-455a-91f9-247db87bcfea)
 
-
+- _Before being a member, Customer A spent on 2 items, total of $25._
+- _Customer B spent on 3 items, which total to $45 before being a member._
+  
 **9.  If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?**
 
 ```sql
