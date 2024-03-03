@@ -1,67 +1,23 @@
-# Case Study #1:Danny's Diner
+# Case Study #1 - Danny's Diner
 
-# Questions and Solutions
+## Table of Contents
+- Problem statement
+- Entity Relationship Diagram
+- Questions and Solutions
+
+  
+## Problem Statement
+Danny wants to use the data to answer a few simple questions about his customers, especially about their visiting patterns, how much money they’ve spent and also which menu items are their favourite
+
+## Entity Relationship Diagram
+
+<kbd>![image](https://github.com/Sakinahcr/Case-Study-1-Danny-s-Diner/assets/132161850/37d0d55d-8057-43d8-ad39-ff938a0e4ad3)
+
+
+## Questions and Solutions
+
+**1. What is the total amount each customer spent at the restaurant?**
 ```sql
--- to create database and table
-
-CREATE DATABASE IF NOT EXISTS dannys_diner;
-
-CREATE TABLE sales (
-    customer_id VARCHAR(1),
-    order_date DATE,
-    product_id INTEGER
-);
-
-INSERT INTO sales
-  (customer_id, order_date, product_id)
-VALUES
-  ('A', '2021-01-01', '1'),
-  ('A', '2021-01-01', '2'),
-  ('A', '2021-01-07', '2'),
-  ('A', '2021-01-10', '3'),
-  ('A', '2021-01-11', '3'),
-  ('A', '2021-01-11', '3'),
-  ('B', '2021-01-01', '2'),
-  ('B', '2021-01-02', '2'),
-  ('B', '2021-01-04', '1'),
-  ('B', '2021-01-11', '1'),
-  ('B', '2021-01-16', '3'),
-  ('B', '2021-02-01', '3'),
-  ('C', '2021-01-01', '3'),
-  ('C', '2021-01-01', '3'),
-  ('C', '2021-01-07', '3');
- 
-
-CREATE TABLE menu (
-    product_id INTEGER,
-    product_name VARCHAR(5),
-    price INTEGER
-);
-
-INSERT INTO menu
-  (product_id, product_name, price)
-VALUES
-  ('1', 'sushi', '10'),
-  ('2', 'curry', '15'),
-  ('3', 'ramen', '12');
-  
-
-CREATE TABLE members (
-    customer_id VARCHAR(1),
-    join_date DATE
-);
-
-INSERT INTO members
-  (customer_id, join_date)
-VALUES
-  ('A', '2021-01-07'),
-  ('B', '2021-01-09');
-  
-  
-  /* --------------------
-   Case Study Questions
-   --------------------*/
-
 SELECT 
     s.customer_id, SUM(n.price) AS total_spent
 FROM
@@ -70,16 +26,32 @@ FROM
     menu n ON s.product_id = n.product_id
 GROUP BY customer_id
 ORDER BY total_spent DESC;
+```
+**Steps**
 
--- 2. How many days has each customer visited the restaurant?
+**Findings**
+
+<kbd>![image](https://github.com/Sakinahcr/Case-Study-1-Danny-s-Diner/assets/132161850/de24169d-38b8-4eb5-a7ab-4557a56fa70c)
+
+**2. How many days has each customer visited the restaurant?**
+
+```sql
 SELECT 
     customer_id, COUNT(DISTINCT (order_date)) AS days_visited
 FROM
     sales
 GROUP BY customer_id
 ORDER BY days_visited DESC;
+```
+**Steps**
 
--- 3. What was the first item from the menu purchased by each customer?
+**Findings**
+
+<kbd>![image](https://github.com/Sakinahcr/Case-Study-1-Danny-s-Diner/assets/132161850/ac4affa3-d968-483e-b71d-ae3d32915390)
+
+**3. What was the first item from the menu purchased by each customer?**
+
+```sql
 WITH order_rank AS (SELECT 
 	s.customer_id, 
 	n.product_name, 
@@ -88,25 +60,50 @@ WITH order_rank AS (SELECT
 FROM 
 	sales s
 JOIN menu n ON s.product_id = n.product_id)
-SELECT customer_id, product_name, order_date
-FROM order_rank
-WHERE num_rank = 1
-GROUP BY customer_id, product_name, order_date;  
-    
+SELECT 
+    customer_id, product_name, order_date
+FROM
+    order_rank
+WHERE
+    num_rank = 1
+GROUP BY customer_id , product_name , order_date; 
+```   
+**Steps**
 
--- 4. What is the most purchased item on the menu and how many times was it purchased by all customers?
+**Findings**
 
+<kbd>![image](https://github.com/Sakinahcr/Case-Study-1-Danny-s-Diner/assets/132161850/81ba65b5-f853-4250-9162-aa0246a4058b)
+
+**4. What is the most purchased item on the menu and how many times was it purchased by all customers?**
+```sql
 WITH most_purchased AS 
-(SELECT s.product_id, n.product_name, COUNT(s.order_date) AS count_of_purchase
-FROM sales s
-JOIN menu n ON s.product_id = n.product_id
-GROUP BY product_id, product_name
+(SELECT 
+    s.product_id,
+    n.product_name,
+    COUNT(s.order_date) AS count_of_purchase
+FROM
+    sales s
+        JOIN
+    menu n ON s.product_id = n.product_id
+GROUP BY product_id , product_name
 ORDER BY count_of_purchase DESC
 LIMIT 1)
-SELECT s.customer_id, p.product_name, count(s.order_date) AS number_of_purchase
-FROM sales s
-JOIN most_purchased p ON s.product_id = p.product_id
-GROUP BY s.customer_id, p.product_name;
+SELECT 
+    s.customer_id,
+    p.product_name,
+    COUNT(s.order_date) AS number_of_purchase
+FROM
+    sales s
+        JOIN
+    most_purchased p ON s.product_id = p.product_id
+GROUP BY s.customer_id , p.product_name; 
+```
+
+**Steps**
+
+**Findings**
+
+<kbd>![image](https://github.com/Sakinahcr/Case-Study-1-Danny-s-Diner/assets/132161850/27b16242-b0ca-4bdb-b6fb-2c21579cfbcf)
 
 
 -- 5. Which item was the most popular for each customer?
