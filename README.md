@@ -49,7 +49,7 @@ ORDER BY days_visited DESC;
 ```
 **Steps**
 - To find the number of days visited, I **COUNT(DISTINCT)** the ```order_date``` from the ```sales``` table.
-- To breakdown the days into each customer, I ***GROUP BY** the count by ```customer_id```.
+- To breakdown the days into each customer, I **GROUP BY** the count by ```customer_id```.
 
 **Findings**
 
@@ -77,10 +77,16 @@ WHERE
 GROUP BY customer_id , product_name , order_date; 
 ```   
 **Steps**
+- Create **Common Table Expression (CTE)** to **RANK** the menu purchased based on the ```order_date```.
+- Then, use the **WHERE = 1** to retrieve only the order ranked as 1, which are the earliest orders.
+- **GROUP BY** the ```customer_id``` to group the result based on customers. 
 
 **Findings**
 
 <kbd>![image](https://github.com/Sakinahcr/Case-Study-1-Danny-s-Diner/assets/132161850/81ba65b5-f853-4250-9162-aa0246a4058b)
+
+- _Sushi and Curry were the first items purchased by Customer A_
+- _Customer B bought curry while Customer C bought ramen as their first purchase_
 
 **4. What is the most purchased item on the menu and how many times was it purchased by all customers?**
 ```sql
@@ -108,11 +114,14 @@ GROUP BY s.customer_id , p.product_name;
 ```
 
 **Steps**
+- 
+
 
 **Findings**
 
 <kbd>![image](https://github.com/Sakinahcr/Case-Study-1-Danny-s-Diner/assets/132161850/27b16242-b0ca-4bdb-b6fb-2c21579cfbcf)
 
+_The most purchased item is Ramen which mostly purchased by Customer A and Customer C_
 
 **5. Which item was the most popular for each customer?**
 
