@@ -28,10 +28,14 @@ GROUP BY customer_id
 ORDER BY total_spent DESC;
 ```
 **Steps**
-
+- To find the total spent by the customers, I **SUM** the ```price``` of the product from the ```menu```.
+- To breakdown the total spent by each customer, I  **JOIN** ```menu``` and ```sales```  which contains the ```customer_id```
+  
 **Findings**
 
 <kbd>![image](https://github.com/Sakinahcr/Case-Study-1-Danny-s-Diner/assets/132161850/de24169d-38b8-4eb5-a7ab-4557a56fa70c)
+
+_Customer A spent the most while Customer C spent the least with $76 and $36 respectively_
 
 **2. How many days has each customer visited the restaurant?**
 
@@ -44,10 +48,14 @@ GROUP BY customer_id
 ORDER BY days_visited DESC;
 ```
 **Steps**
+- To find the number of days visited, I **COUNT(DISTINCT)** the ```order_date``` from the ```sales``` table.
+- To breakdown the days into each customer, I ***GROUP BY** the count by ```customer_id```.
 
 **Findings**
 
 <kbd>![image](https://github.com/Sakinahcr/Case-Study-1-Danny-s-Diner/assets/132161850/ac4affa3-d968-483e-b71d-ae3d32915390)
+
+_Customer B is the most frequent to the diner with total of 6 days compared to Customer A and C with 4 and 2 days respectively_
 
 **3. What was the first item from the menu purchased by each customer?**
 
